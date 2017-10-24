@@ -1,4 +1,6 @@
+// MODIFIED
 import defer from 'promise-defer';
+import iconDefs from './faIcons.json';
 let instance = null;
 
 export default class IconsStorage {
@@ -28,28 +30,24 @@ export default class IconsStorage {
 		}
 
 		this.isLoadingIcons = true;
+		let data = iconDefs.array;
+    const icons = data.map(nameAndCode => {
+      const parts = nameAndCode.split(':');
+      return {
+        code: parts[0],
+        name: parts[1]
+      };
+    });
+    this.icons = icons;
 
-		return fetch('https://raw.githubusercontent.com/google/material-design-icons/master/iconfont/codepoints')
-			.then(response => response.text())
-			.then(data => data.split('\n'))
-			.then(namesAndCodes => namesAndCodes.map(nameAndCode => {
-				const parts = nameAndCode.split(' ');
-				return {
-					name: parts[0],
-					code: parts[1]
-				};
-			}))
-			.then((icons) => {
-				this.icons = icons;
-				this.isLoadingIcons = false;
-				if (this.requestWaitingForIcons.length > 0) {
-					this.requestWaitingForIcons.map(awaitingPromise => {
-						awaitingPromise.resolve(icons);
-					});
-				}
+    this.isLoadingIcons = false;
+    if (this.requestWaitingForIcons.length > 0) {
+      this.requestWaitingForIcons.map(awaitingPromise => {
+        awaitingPromise.resolve(this.icons);
+      });
+    }
 
-				return icons;
-			});
+    return icons;
 	}
 
 }

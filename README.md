@@ -1,12 +1,12 @@
-# material-ui-icon-picker
+# fontawesome-icon-picker
 
-Presents a [material-ui](http://www.material-ui.com/#/) dialog with an up-to-date list of material icons. allowing the user to pick one.
+Presents a [material-ui](http://www.material-ui.com/#/) dialog with an up-to-date list of fontawesome icons. allowing the user to pick one.
 The chosen icon will be returned in the `onPick` callback.
 
 
 ## Demo & Examples
 
-Live demo: [DMDc0de.github.io/material-ui-icon-picker](http://DMDc0de.github.io/material-ui-icon-picker/)
+Live demo of material UI picker: [DMDc0de.github.io/material-ui-icon-picker](http://DMDc0de.github.io/material-ui-icon-picker/)
 
 To build the examples locally, run:
 
@@ -16,16 +16,6 @@ npm start
 ```
 
 Then open [`localhost:8000`](http://localhost:8000) in a browser.
-
-
-## Installation
-
-The easiest way to use react-material-ui-icon-picker is to install it from NPM and include it in your own React build process (using [Browserify](http://browserify.org), [Webpack](http://webpack.github.io/), etc).
-
-You can also use the standalone build by including `dist/react-material-ui-icon-picker.js` in your page. If you use this, make sure you have already included React, and it is available as a global variable.
-
-```
-npm install react-material-ui-icon-picker --save
 ```
 
 

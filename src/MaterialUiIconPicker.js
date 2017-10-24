@@ -1,3 +1,4 @@
+// MODIFIED
 import React from 'react';
 import {RaisedButton, FlatButton, Dialog, FontIcon, LinearProgress} from 'material-ui';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
@@ -118,15 +119,15 @@ class MaterialUiIconPicker extends React.Component {
 
 	constructor(props) {
 		super(props);
+    this.iconsStorage = new IconsStorage();
+    let iconObj = this.iconsStorage.getIcons();
 
 		this.state = {
 			pickerDialogOpen: false,
 			_icons: [],
-			icons: [],
+			icons: iconObj,
 			icon: null
 		};
-
-		this.iconsStorage = new IconsStorage();
 	}
 
 	componentWillMount() {
@@ -139,8 +140,9 @@ class MaterialUiIconPicker extends React.Component {
 	}
 
 	componentDidMount() {
-		this.iconsPromise = this.iconsStorage.getIcons();
-		this.iconsPromise.then(icons => this.showIcons(icons));
+		// this.iconsPromise = this.iconsStorage.getIcons();
+		this.showIcons(this.state.icons);
+		// this.iconsPromise.then(icons => this.showIcons(icons));
 	}
 	
 	showIcons(icons) {
@@ -189,7 +191,8 @@ class MaterialUiIconPicker extends React.Component {
 		} else {
 			let updatedList = this.state._icons;
 			updatedList = updatedList.filter(function (item) {
-				const searches = item.name.split('_').map(namePiece => namePiece.search(event.target.value.toLowerCase()) !== -1);
+				const searchString = item.code + ' ' + item.name;
+				const searches = searchString.split('-').map(namePiece => namePiece.search(event.target.value.toLowerCase()) !== -1);
 				return searches.indexOf(true) > -1;
 			});
 
@@ -231,16 +234,20 @@ class MaterialUiIconPicker extends React.Component {
 				disabled={!this.state.selected}
 				onClick={this.pickAndClose.bind(this)}
 				icon={this.state.selected ?
-					<FontIcon className="material-icons">{this.state.selected.name}</FontIcon> : null}
+					<i className={'fa ' + icon.code}/> : null}
 			/>,
 		];
-
-		const icons = this.state.icons.map((icon, index) => {
+		console.log(this.state.icons);
+		console.log(typeof this.state.icons);
+		const icons = Object.keys(this.state.icons).map((index,icon,lame) => {
+			//console.log(index, icon, lame);
+			icon = this.state.icons[index];
 			return (<div key={index} style={styles.iconsItem} onClick={() => this.select(icon)}>
 				<div
-					style={this.state.selected && this.state.selected.name === icon.name ? styles.selectedBackgroundBox : styles.backgroundBox}></div>
-				<FontIcon style={styles.iconsItemIcon} className="material-icons">{icon.name}</FontIcon>
-				<div style={styles.iconsItemCaption}>{icon.name.split('_').join(' ')}</div>
+					style={this.state.selected && this.state.selected.code === icon.code ? styles.selectedBackgroundBox : styles.backgroundBox}/>
+				{/*<FontIcon style={styles.iconsItemIcon} className="material-icons">{icon.name}</FontIcon>*/}
+				<i className={'fa ' + icon.code} style={{fontSize: 32}}/>
+				<div style={styles.iconsItemCaption}>{icon.code.split('-').join(' ').substr(3)}</div>
 			</div>);
 		});
 
