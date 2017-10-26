@@ -234,7 +234,7 @@ class MaterialUiIconPicker extends React.Component {
 				disabled={!this.state.selected}
 				onClick={this.pickAndClose.bind(this)}
 				icon={this.state.selected ?
-					<i className={'fa ' + this.state.icon.code}/> : null}
+					<i className={'fa ' + this.state.selected.code}/> : null}
 			/>,
 		];
 		const icons = Object.keys(this.state.icons).map((index,icon,lame) => {
