@@ -238,13 +238,12 @@ class MaterialUiIconPicker extends React.Component {
 			/>,
 		];
 		const icons = Object.keys(this.state.icons).map((index,icon,lame) => {
-			//console.log(index, icon, lame);
 			icon = this.state.icons[index];
 			return (<div key={index} style={styles.iconsItem} onClick={() => this.select(icon)}>
 				<div
 					style={this.state.selected && this.state.selected.code === icon.code ? styles.selectedBackgroundBox : styles.backgroundBox}/>
 				{/*<FontIcon style={styles.iconsItemIcon} className="material-icons">{icon.name}</FontIcon>*/}
-				<i className={'fa ' + icon.code} style={{fontSize: 32}}/>
+				<i className={'fa ' + icon.code} style={{fontSize: 32, zIndex: 1}}/>
 				<div style={styles.iconsItemCaption}>{icon.code.split('-').join(' ').substr(3)}</div>
 			</div>);
 		});
