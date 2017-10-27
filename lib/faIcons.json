@@ -1,4 +1,6 @@
-{"array": ["fa-glass:wine,champagne,cup",
+{"array": [
+"fa-no-icon:empty,none,nothing,blank,clear",
+"fa-glass:wine,champagne,cup",
 "fa-music:tune,song,sound,audio,note",
 "fa-search:magnifying glass,look,find",
 "fa-envelope-o:mail,letter,paper,note",
