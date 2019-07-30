@@ -19,6 +19,9 @@ var taskConfig = {
 			'react',
 			'react-dom'
 		],
+		files: [
+			'src/faIcons.json'
+		],
 		lib: 'lib'
 	},
 
