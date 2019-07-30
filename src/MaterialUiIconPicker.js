@@ -252,7 +252,7 @@ class MaterialUiIconPicker extends React.Component {
 			<MuiThemeProvider>
 				<div>
 					<RaisedButton onClick={this.handleOpen.bind(this)} label={this.props.label} primary/>
-
+					{this.state.pickerDialogOpen ? 
 					<Dialog
 						autoScrollBodyContent
 						title={
@@ -278,7 +278,7 @@ class MaterialUiIconPicker extends React.Component {
 							: <LinearProgress mode="indeterminate" />
 						}
 
-					</Dialog>
+					</Dialog> : null}
 				</div>
 
 
